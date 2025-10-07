@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <MidaScript projectKey="1234567890" />
+        <MidaScript projectKey="5Vxqa3ZlROxqaBgJzOv1b0" />
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
