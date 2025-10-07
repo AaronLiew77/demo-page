@@ -26,9 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <MidaScript projectKey="5Vxqa3ZlROxqaBgJzOv1b0" />
-      </Head>
+     <head>
+      <script type="text/javascript" async src="https://cdn-eu.mida.so/js/optimize.js?key=vJzNb2p6RqZl5B10LPM87x"></script>
+     </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
