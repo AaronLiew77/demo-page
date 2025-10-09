@@ -10,7 +10,7 @@ export default function Home() {
             SaaSify
           </div>
           <div className="hidden md:flex space-x-8">
-            <a href="#features" className="text-gray-600 hover:text-indigo-600 transition-colors">Features</a>
+            <a href="https://aaronliew.vercel.app/" className="text-gray-600 hover:text-indigo-600 transition-colors">Check this out</a>
             <a href="#pricing" className="text-gray-600 hover:text-indigo-600 transition-colors">Pricing</a>
             <a href="#about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</a>
           </div>
