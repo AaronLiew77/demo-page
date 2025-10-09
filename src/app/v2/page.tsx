@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function V2Page() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
+    <div className="min-h-screen bg-black">
       {/* Navigation */}
       <nav className="px-6 py-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
