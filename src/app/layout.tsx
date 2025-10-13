@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
      <head>
       {/* Mida Account */}
-      <MidaScript projectKey="E3jxwZ6ldLqbzYg90mMX8O" useAntiFlicker={true}/>
+      <MidaScript projectKey="E3jxwZ6ldLqbzYg90mMX8O"/>
 
       {/* US */}
       {/* <script type="text/javascript" async src="https://cdn.mida.so/js/optimize.js?key=bJVGmqv2Yv4QDBlWgj9k3o"></script>      EU */}
