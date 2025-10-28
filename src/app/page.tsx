@@ -1,10 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="px-6 py-4">
+      
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="text-2xl font-bold text-indigo-600">
             SaaSify
@@ -28,6 +30,19 @@ export default function Home() {
       {/* Hero Section */}
       <main className="px-6 py-20">
         <div className="max-w-7xl mx-auto text-center">
+          <Image src="https://d2e8in8hqyll4p.cloudfront.net/_next/image/?url=https%3A%2F%2Fcms-radius-com-bucket.s3.eu-west-2.amazonaws.com%2Fbusiness_insurance_f9cf38298e.jpg&w=1080&q=75" alt="SaaSify" width={500} height={500} />
+          <Image src="https://d2e8in8hqyll4p.cloudfront.net/_next/image/?url=https%3A%2F%2Fcms-radius-com-bucket.s3.eu-west-2.amazonaws.com%2FMicrosoft_Teams_image_7_08183417ec.png&w=1080&q=75" alt="SaaSify" width={500} height={500} />
+          <Image src="https://d2e8in8hqyll4p.cloudfront.net/_next/image/?url=https%3A%2F%2Fcms-radius-com-bucket.s3.eu-west-2.amazonaws.com%2Fkinesis_tablet_208a22e8f7.jpg&w=1080&q=75" alt="SaaSify" width={500} height={500} />
+          <Image src="https://d2e8in8hqyll4p.cloudfront.net/_next/image/?url=https%3A%2F%2Fcms-radius-com-bucket.s3.eu-west-2.amazonaws.com%2Fwhite_van_coming_arund_corner_2e0dbbfa47.jpeg&w=1920&q=75" alt="SaaSify" width={500} height={500} />
+          <Image src="https://d2e8in8hqyll4p.cloudfront.net/_next/image/?url=https%3A%2F%2Fcms-radius-com-bucket.s3.eu-west-2.amazonaws.com%2Fbusiness_insurance_f9cf38298e.jpg&w=1080&q=75" alt="SaaSify" width={500} height={500} />
+          <Image src="https://d2e8in8hqyll4p.cloudfront.net/_next/image/?url=https%3A%2F%2Fcms-radius-com-bucket.s3.eu-west-2.amazonaws.com%2FAdobe_Stock_49661077_1_ea2304ffcf.jpeg&w=1920&q=75" alt="SaaSify" width={500} height={500} />
+          <Image src="https://d2e8in8hqyll4p.cloudfront.net/_next/image/?url=https%3A%2F%2Fcms-radius-com-bucket.s3.eu-west-2.amazonaws.com%2Fbusiness_insurance_f9cf38298e.jpg&w=1080&q=75" alt="SaaSify" width={500} height={500} />
+          <Image src="https://d2e8in8hqyll4p.cloudfront.net/_next/image/?url=https%3A%2F%2Fcms-radius-com-bucket.s3.eu-west-2.amazonaws.com%2Fenergy_enterprise_bb35bfd9d2.jpg&w=1080&q=75" alt="SaaSify" width={500} height={500} />
+          <Image src="https://d2e8in8hqyll4p.cloudfront.net/_next/image/?url=https%3A%2F%2Fcms-radius-com-bucket.s3.eu-west-2.amazonaws.com%2F8561f5e826ee27f492d4c0fa008aadc7_ebe83c0c71.jpg&w=1080&q=75" alt="SaaSify" width={500} height={500} />
+          <Image src="https://d2e8in8hqyll4p.cloudfront.net/_next/image/?url=https%3A%2F%2Fcms-radius-com-bucket.s3.eu-west-2.amazonaws.com%2FAdobe_Stock_55328545_fd82b06c89.jpeg&w=1080&q=75" alt="SaaSify" width={500} height={500} />
+          <Image src="https://d2e8in8hqyll4p.cloudfront.net/_next/image/?url=https%3A%2F%2Fcms-radius-com-bucket.s3.eu-west-2.amazonaws.com%2Fbusiness_insurance_f9cf38298e.jpg&w=1080&q=75" alt="SaaSify" width={500} height={500} />
+          <Image src="https://d2e8in8hqyll4p.cloudfront.net/_next/image/?url=https%3A%2F%2Fcms-radius-com-bucket.s3.eu-west-2.amazonaws.com%2Fbusiness_insurance_f9cf38298e.jpg&w=1080&q=75" alt="SaaSify" width={500} height={500} />
+          <Image src="https://d2e8in8hqyll4p.cloudfront.net/_next/image/?url=https%3A%2F%2Fcms-radius-com-bucket.s3.eu-west-2.amazonaws.com%2Fcyber_insurance_295c22d40b.jpg&w=1080&q=75" alt="SaaSify" width={500} height={500} />
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
             Build Your
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600"> SaaS</span>
