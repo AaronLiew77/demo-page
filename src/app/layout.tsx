@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { MidaScript } from "mida-nextjs";
-import Head from "next/head";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,14 +25,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-     <head>
-      {/* Mida Account */}
-      <MidaScript projectKey="E3jxwZ6ldLqbzYg90mMX8O" useAntiFlicker={true} antiFlickerTimeout={500}/>
-
-      {/* US */}
-      {/* <script type="text/javascript" async src="https://cdn.mida.so/js/optimize.js?key=bJVGmqv2Yv4QDBlWgj9k3o"></script>      EU */}
-     {/* <script type="text/javascript" async src="https://cdn-eu.mida.so/js/optimize_experiment.js?key=5Vxqa3ZlROxqaBgJzOv1b0"></script>      */}
-     </head>
+    <head>
+      <Script type="text/javascript" async src="https://cdn.mida.so/js/optimize.js?key=bJVGmqv2Yv4QDBlWgj9k3o" strategy="beforeInteractive"></Script> 
+    </head>
+ 
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
