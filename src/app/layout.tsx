@@ -30,6 +30,7 @@ export default function RootLayout({
         src="https://cdn.mida.so/js/optimize.js?key=E3jxwZ6ldLqbzYg90mMX8O" 
         strategy="beforeInteractive"
       />
+      <link rel="preconnect" href="https://api-us.mida.so"></link>
     </head>
  
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
