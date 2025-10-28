@@ -25,12 +25,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-    <head>
-      <Script type="text/javascript" async src="https://cdn.mida.so/js/optimize.js?key=E3jxwZ6ldLqbzYg90mMX8O" strategy="beforeInteractive"></Script> 
-    </head>
+
  
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
+      <Script 
+        src="https://cdn.mida.so/js/optimize.js?key=E3jxwZ6ldLqbzYg90mMX8O" 
+        strategy="beforeInteractive"
+      />
       </body>
     </html>
   )
