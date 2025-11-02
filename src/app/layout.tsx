@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import { MidaScript } from "mida-nextjs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
     <head>
+      {/* <MidaScript projectKey="E3jxwZ6ldLqbzYg90mMX8O" useAntiFlicker={true} antiFlickerTimeout={3000}/> */}
       <Script 
         id="flicker-prevention"
         strategy="beforeInteractive"
@@ -37,7 +39,7 @@ export default function RootLayout({
         }}
       />
       <Script 
-        src="https://cdn.mida.so/js/optimize.js?key=E3jxwZ6ldLqbzYg90mMX8O" 
+        src="https://cdn.mida.so/js/optimize_visitor_test.js?key=E3jxwZ6ldLqbzYg90mMX8O" 
         strategy="beforeInteractive"
       />
       <Script 
