@@ -2,7 +2,215 @@ import Link from "next/link";
 import Image from "next/image";
 import ImageGallery from "./components/ImageGallery";
 
-export default function Home() {
+interface PageProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default function Home({ searchParams }: PageProps) {
+  const isV3 = searchParams?.page === 'v3';
+
+  // V3 Layout - Dark theme with different structure
+  if (isV3) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+        {/* Navigation */}
+        <nav className="px-6 py-6 border-b border-gray-700">
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
+            <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+              SaaSify V3
+            </div>
+            <div className="hidden md:flex space-x-8">
+              <a href="https://aaronliew.vercel.app/" className="text-gray-300 hover:text-purple-400 transition-colors">Check this out</a>
+              <a href="#pricing" className="text-gray-300 hover:text-purple-400 transition-colors">Pricing</a>
+              <a href="#about" className="text-gray-300 hover:text-purple-400 transition-colors">About</a>
+            </div>
+            <div className="flex space-x-4">
+              <Link href="/v2" className="text-gray-300 hover:text-purple-400 transition-colors">
+                V2
+              </Link>
+              <Link href="/" className="text-gray-300 hover:text-purple-400 transition-colors">
+                V1
+              </Link>
+              <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg">
+                Get Started
+              </button>
+            </div>
+          </div>
+        </nav>
+
+        {/* Hero Section */}
+        <main className="px-6 py-24">
+          <div className="max-w-7xl mx-auto text-center">
+            <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 leading-tight">
+              Build Your
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 animate-pulse"> SaaS</span>
+              <span className="block text-4xl md:text-6xl mt-4">Faster Than Ever</span>
+            </h1>
+            <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+              The all-in-one platform that helps you launch, scale, and grow your SaaS business with powerful tools and analytics.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-5 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all shadow-2xl transform hover:scale-105">
+                Start Free Trial
+              </button>
+              <button className="border-2 border-purple-500 text-purple-400 px-10 py-5 rounded-xl text-lg font-semibold hover:bg-purple-500 hover:text-white transition-all transform hover:scale-105">
+                Watch Demo
+              </button>
+            </div>
+          </div>
+        </main>
+
+        {/* Features Section */}
+        <section id="features" className="px-6 py-24 bg-gray-900/50">
+          <ImageGallery />
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-5xl font-bold text-center text-white mb-20">
+              Everything You Need to Succeed
+            </h2>
+            <div className="grid md:grid-cols-3 gap-10">
+              <div className="text-center p-8 bg-gray-800/50 rounded-2xl border border-gray-700 hover:border-purple-500 transition-all transform hover:scale-105">
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-semibold text-white mb-3">Lightning Fast</h3>
+                <p className="text-gray-300">Deploy your SaaS in minutes, not months. Our platform handles the complexity so you can focus on your product.</p>
+              </div>
+              <div className="text-center p-8 bg-gray-800/50 rounded-2xl border border-gray-700 hover:border-purple-500 transition-all transform hover:scale-105">
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-semibold text-white mb-3">Analytics Dashboard</h3>
+                <p className="text-gray-300">Track your growth with comprehensive analytics and insights that help you make data-driven decisions.</p>
+              </div>
+              <div className="text-center p-8 bg-gray-800/50 rounded-2xl border border-gray-700 hover:border-purple-500 transition-all transform hover:scale-105">
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-semibold text-white mb-3">Secure & Reliable</h3>
+                <p className="text-gray-300">Enterprise-grade security and 99.9% uptime guarantee to keep your business running smoothly.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section id="pricing" className="px-6 py-24 bg-gradient-to-br from-gray-900 to-black">
+          <div className="max-w-7xl mx-auto text-center">
+            <h2 className="text-5xl font-bold text-white mb-20">
+              Simple, Transparent Pricing
+            </h2>
+            <div className="grid md:grid-cols-3 gap-10">
+              <div className="bg-gray-800/50 p-10 rounded-2xl border border-gray-700 shadow-xl">
+                <h3 className="text-3xl font-bold text-white mb-6">Starter</h3>
+                <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-6">$29<span className="text-2xl text-gray-400">/mo</span></div>
+                <ul className="text-left space-y-4 mb-10">
+                  <li className="flex items-center text-gray-300">
+                    <svg className="w-6 h-6 text-purple-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Up to 1,000 users
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <svg className="w-6 h-6 text-purple-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Basic analytics
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <svg className="w-6 h-6 text-purple-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Email support
+                  </li>
+                </ul>
+                <button className="w-full bg-gray-700 text-white py-4 rounded-xl font-semibold hover:bg-gray-600 transition-all">
+                  Get Started
+                </button>
+              </div>
+              <div className="bg-gradient-to-br from-purple-900/50 to-pink-900/50 p-10 rounded-2xl border-2 border-purple-500 relative shadow-2xl transform scale-105">
+                <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
+                  Most Popular
+                </div>
+                <h3 className="text-3xl font-bold text-white mb-6">Pro</h3>
+                <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-6">$99<span className="text-2xl text-gray-300">/mo</span></div>
+                <ul className="text-left space-y-4 mb-10">
+                  <li className="flex items-center text-gray-200">
+                    <svg className="w-6 h-6 text-pink-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Up to 10,000 users
+                  </li>
+                  <li className="flex items-center text-gray-200">
+                    <svg className="w-6 h-6 text-pink-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Advanced analytics
+                  </li>
+                  <li className="flex items-center text-gray-200">
+                    <svg className="w-6 h-6 text-pink-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Priority support
+                  </li>
+                </ul>
+                <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg">
+                  Get Started
+                </button>
+              </div>
+              <div className="bg-gray-800/50 p-10 rounded-2xl border border-gray-700 shadow-xl">
+                <h3 className="text-3xl font-bold text-white mb-6">Enterprise</h3>
+                <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-6">$299<span className="text-2xl text-gray-400">/mo</span></div>
+                <ul className="text-left space-y-4 mb-10">
+                  <li className="flex items-center text-gray-300">
+                    <svg className="w-6 h-6 text-purple-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Unlimited users
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <svg className="w-6 h-6 text-purple-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Custom analytics
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <svg className="w-6 h-6 text-purple-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    24/7 phone support
+                  </li>
+                </ul>
+                <button className="w-full bg-gray-700 text-white py-4 rounded-xl font-semibold hover:bg-gray-600 transition-all">
+                  Contact Sales
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="px-6 py-16 bg-black border-t border-gray-800">
+          <div className="max-w-7xl mx-auto text-center">
+            <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-6">SaaSify V3</div>
+            <p className="text-gray-400 mb-10">Building the future of SaaS, one startup at a time.</p>
+            <div className="flex justify-center space-x-8">
+              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">Privacy</a>
+              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">Terms</a>
+              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">Contact</a>
+            </div>
+          </div>
+        </footer>
+      </div>
+    );
+  }
+
+  // Original Layout
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
