@@ -38,10 +38,10 @@ export default function RootLayout({
           `
         }}
       />
-      <Script 
+      {/* <Script 
         src="https://cdn.mida.so/js/optimize.js?key=bJVGmqv2Yv4QDBlWgj9k3o" 
         strategy="beforeInteractive"
-      />
+      /> */}
       <Script 
         id="preconnect-mida"
         strategy="beforeInteractive"
