@@ -39,10 +39,10 @@ export default function RootLayout({
         }}
       />
       <Script 
-        src="https://cdn-eu.mida.so/js/optimize.js?key=5Vxqa3ZlROxqaBgJzOv1b0" 
+        src="https://cdn-eu.mida.so/js/optimize_experiment.js?key=5Vxqa3ZlROxqaBgJzOv1b0" 
         strategy="beforeInteractive"
       />
-      <Script 
+      {/* <Script 
         id="preconnect-mida"
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
@@ -53,7 +53,7 @@ export default function RootLayout({
             document.head.appendChild(link);
           `
         }}
-      />
+      /> */}
     </head>
  
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
