@@ -39,7 +39,7 @@ export default function RootLayout({
         }}
       />
       <Script 
-        src="https://cdn.mida.so/js/optimize_experiment.js?key=LZo291PlY3vOydqgvV5wO6" 
+        src="https://cdn.mida.so/js/optimize.js?key=E3jxwZ6ldLqbzYg90mMX8O" 
         strategy="beforeInteractive"
       />
       {/* <Script 
