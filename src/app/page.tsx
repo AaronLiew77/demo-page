@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ImageGallery from "./components/ImageGallery";
 import GetStartedButton from "./components/GetStartedButton";
+import ConfirmationPopup from "./components/ConfirmationPopup";
 
 interface PageProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -14,6 +15,7 @@ export default function Home({ searchParams }: PageProps) {
   if (isV3) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+        <ConfirmationPopup />
         {/* Navigation */}
         <nav className="px-6 py-6 border-b border-gray-700">
           <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -208,6 +210,7 @@ export default function Home({ searchParams }: PageProps) {
   // Original Layout
   return (
     <div className="min-h-screen bg-white">
+      <ConfirmationPopup />
       {/* Navigation */}
       <nav className="px-6 py-4">
       
