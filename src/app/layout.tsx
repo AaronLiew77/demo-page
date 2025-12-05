@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
     <head>
       {/* <MidaScript projectKey="E3jxwZ6ldLqbzYg90mMX8O" useAntiFlicker={true} antiFlickerTimeout={3000}/> */}
-      <Script 
+      {/* <Script 
         id="flicker-prevention"
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
@@ -37,7 +37,7 @@ export default function RootLayout({
             !function(h,i,d,e){var t,n=h.createElement("style");n.id=e,n.innerHTML="body{opacity:0}",h.head.appendChild(n),t=d,i.rmfk=function(){var t=h.getElementById(e);t&&t.parentNode.removeChild(t)},setTimeout(i.rmfk,t)}(document,window,timeout,"abhide");
           `
         }}
-      />
+      /> */}
       {/* <Script 
         src="https://cdn.mida.so/js/optimize.js?key=E3jxwZ6ldLqbzYg90mMX8O" 
         strategy="beforeInteractive"
