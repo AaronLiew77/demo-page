@@ -3,6 +3,7 @@ import Image from "next/image";
 import ImageGallery from "./components/ImageGallery";
 import GetStartedButton from "./components/GetStartedButton";
 import ConfirmationPopup from "./components/ConfirmationPopup";
+import MixpanelInitializer from "./components/MixpanelInitializer";
 
 interface PageProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -15,6 +16,7 @@ export default function Home({ searchParams }: PageProps) {
   if (isV3) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+        <MixpanelInitializer />
         <ConfirmationPopup />
         {/* Navigation */}
         <nav className="px-6 py-6 border-b border-gray-700">
@@ -206,10 +208,11 @@ export default function Home({ searchParams }: PageProps) {
       </div>
     );
   }
-
+  
   // Original Layout
   return (
     <div className="min-h-screen bg-white">
+      <MixpanelInitializer />
       <ConfirmationPopup />
       {/* Navigation */}
       <nav className="px-6 py-4">
