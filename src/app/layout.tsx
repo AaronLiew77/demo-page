@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import { MidaScript } from "mida-nextjs";
+import mixpanel from "mixpanel-browser";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,10 +40,10 @@ export default function RootLayout({
           `
         }}
       /> */}
-      {/* <Script 
+      <Script 
         src="https://cdn.mida.so/js/optimize.js?key=E3jxwZ6ldLqbzYg90mMX8O" 
         strategy="beforeInteractive"
-      /> */}
+      />
       {/* <Script 
         id="preconnect-mida"
         strategy="beforeInteractive"
@@ -54,6 +56,10 @@ export default function RootLayout({
           `
         }}
       /> */}
+      {mixpanel.init('e6e85fff440bd0101c2adea6dbb894f9', {
+        autocapture: true,
+        record_sessions_percent: 100,
+      })}
     </head>
  
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
