@@ -212,7 +212,7 @@ export default function Home({ searchParams }: PageProps) {
   // Original Layout
   return (
     <div className="min-h-screen bg-white">
-      <MixpanelInitializer />
+      {/* <MixpanelInitializer /> */}
       <ConfirmationPopup />
       {/* Navigation */}
       <nav className="px-6 py-4">
