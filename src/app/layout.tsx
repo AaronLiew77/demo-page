@@ -17,43 +17,21 @@ export default function RootLayout({
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-            (function() {
-              var timeout = 3000;
-              var timeoutId;
-              
-              // Create style element with id="abhide" that Optimize.js expects
-              var style = document.createElement('style');
-              style.id = 'abhide';
-              style.innerHTML = 'body{display:none !important}';
-              document.head.appendChild(style);
-              
-              // Monitor for when Optimize.js removes #abhide, then show body
-              var checkInterval = setInterval(function() {
-                var el = document.getElementById('abhide');
-                if (!el) {
-                  // #abhide was removed by Optimize.js, show the body
-                  document.body.style.display = '';
-                  clearInterval(checkInterval);
-                  clearTimeout(timeoutId);
-                  console.log('[Anti-Flicker] Removed by Optimize.js');
-                }
-              }, 50);
-              
-              // Fallback function to remove the style if Optimize.js doesn't call mida.rmfk()
-              var removeFallback = function() {
-                var el = document.getElementById('abhide');
-                if (el && el.parentNode) {
-                  el.parentNode.removeChild(el);
-                }
-                document.body.style.display = '';
-                clearInterval(checkInterval);
-                console.log('[Anti-Flicker] Removed via fallback timeout');
-              };
-              
-              console.log('[Anti-Flicker] Created #abhide element, waiting for Optimize.js or timeout');
-              // Set the fallback timeout
-              timeoutId = setTimeout(removeFallback, timeout);
-            })();
+            !function(){
+              var t=3e3,e=document.createElement("style");
+              e.id="abhide";
+              e.innerHTML="body{opacity:0 !important}";
+              document.head.appendChild(e);
+              var i=setInterval(function(){
+                document.getElementById("abhide")||(document.body.style.opacity="",clearInterval(i),clearTimeout(o))
+              },50);
+              var o=setTimeout(function(){
+                var t=document.getElementById("abhide");
+                t&&t.parentNode&&t.parentNode.removeChild(t);
+                document.body.style.opacity="";
+                clearInterval(i)
+              },t)
+            }();
           `
         }}
       />
@@ -76,7 +54,7 @@ export default function RootLayout({
   
     </head>
  
-      <body style={{ display: 'none' }}>
+      <body style={{ opacity: 0 }}>
         {children}
       </body>
     </html>
