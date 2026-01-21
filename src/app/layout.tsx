@@ -21,22 +21,33 @@ export default function RootLayout({
               var timeout = 3000;
               var timeoutId;
               
-              // Hide body directly
-              document.documentElement.style.cssText = 'body{display:none !important}';
-              
               // Create style element with id="abhide" that Optimize.js expects
               var style = document.createElement('style');
               style.id = 'abhide';
               style.innerHTML = 'body{display:none !important}';
               document.head.appendChild(style);
               
+              // Monitor for when Optimize.js removes #abhide, then show body
+              var checkInterval = setInterval(function() {
+                var el = document.getElementById('abhide');
+                if (!el) {
+                  // #abhide was removed by Optimize.js, show the body
+                  document.body.style.display = '';
+                  clearInterval(checkInterval);
+                  clearTimeout(timeoutId);
+                  console.log('[Anti-Flicker] Removed by Optimize.js');
+                }
+              }, 50);
+              
               // Fallback function to remove the style if Optimize.js doesn't call mida.rmfk()
               var removeFallback = function() {
                 var el = document.getElementById('abhide');
                 if (el && el.parentNode) {
                   el.parentNode.removeChild(el);
-                  console.log('[Anti-Flicker] Removed via fallback timeout');
                 }
+                document.body.style.display = '';
+                clearInterval(checkInterval);
+                console.log('[Anti-Flicker] Removed via fallback timeout');
               };
               
               console.log('[Anti-Flicker] Created #abhide element, waiting for Optimize.js or timeout');
