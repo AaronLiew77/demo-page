@@ -16,9 +16,19 @@ export default function RootLayout({
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-            setTimeout(() => {
-              document.body.style.opacity = '1';
-            }, 3000);
+            var timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
+            !function(h,i,d,e){
+              var t,n=h.createElement("style");
+              n.id=e;
+              n.innerHTML="body{opacity:0}";
+              h.head.appendChild(n);
+              t=d;
+              i.rmfk=function(){
+                var t=h.getElementById(e);
+                t && t.parentNode.removeChild(t)
+              };
+              setTimeout(i.rmfk,t)
+            }(document,window,timeout,"abhide");
           `
         }}
       />
@@ -41,7 +51,7 @@ export default function RootLayout({
   
     </head>
  
-      <body style={{ opacity: 0 }}>
+      <body>
         {children}
       </body>
     </html>
