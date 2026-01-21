@@ -1,5 +1,6 @@
 import "./globals.css";
 import Script from "next/script";
+import { MidaScript } from "mida-nextjs";
 
 
 export default function RootLayout({
@@ -10,25 +11,19 @@ export default function RootLayout({
   return (
     <html lang="en">
     <head>
+      {/* Anti-flicker script with rmfk function for Optimize.js */}
       <Script
         id="anti-flicker"
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-            var timeout = 10000; // Timeout value to remove the flicker (in milliseconds)
-            !function(h,i,d,e){
-              var t,n=h.createElement("style");
-              n.id=e;
-              n.innerHTML="body{opacity:0}";
-              h.head.appendChild(n);
-              t=d;
-              i.rmfk=function(){
-                console.log('rmfk called');
-                var t=h.getElementById(e);
-                t && t.parentNode.removeChild(t)
-              };
-              setTimeout(i.rmfk,t)
-            }(document,window,timeout,"abhide");
+            // Expose rmfk function for Optimize.js to call
+            window.rmfk = function() {
+              document.body.style.display = '';
+            };
+            
+            // Fallback timeout in case Optimize.js doesn't call rmfk
+            setTimeout(window.rmfk, 3000);
           `
         }}
       />
@@ -51,7 +46,7 @@ export default function RootLayout({
   
     </head>
  
-      <body>
+      <body style={{ display: 'none' }}>
         {children}
       </body>
     </html>
