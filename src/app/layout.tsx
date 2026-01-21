@@ -11,7 +11,7 @@ export default function RootLayout({
   return (
     <html lang="en">
     <head>
-      {/* Anti-flicker script with rmfk function for Optimize.js */}
+      {/* Anti-flicker script - creates #abhide element for Optimize.js */}
       <Script
         id="anti-flicker"
         strategy="beforeInteractive"
@@ -21,16 +21,27 @@ export default function RootLayout({
               var timeout = 3000;
               var timeoutId;
               
-              // Function to remove the flicker
-              window.rmfk = function() {
-                if (timeoutId) {
-                  clearTimeout(timeoutId);
+              // Hide body directly
+              document.documentElement.style.cssText = 'body{display:none !important}';
+              
+              // Create style element with id="abhide" that Optimize.js expects
+              var style = document.createElement('style');
+              style.id = 'abhide';
+              style.innerHTML = 'body{display:none !important}';
+              document.head.appendChild(style);
+              
+              // Fallback function to remove the style if Optimize.js doesn't call mida.rmfk()
+              var removeFallback = function() {
+                var el = document.getElementById('abhide');
+                if (el && el.parentNode) {
+                  el.parentNode.removeChild(el);
+                  console.log('[Anti-Flicker] Removed via fallback timeout');
                 }
-                document.body.style.display = '';
               };
               
+              console.log('[Anti-Flicker] Created #abhide element, waiting for Optimize.js or timeout');
               // Set the fallback timeout
-              timeoutId = setTimeout(window.rmfk, timeout);
+              timeoutId = setTimeout(removeFallback, timeout);
             })();
           `
         }}
