@@ -16,15 +16,22 @@ export default function RootLayout({
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-            setTimeout(() => {
-              document.body.style.display = '';
-            }, 3000);
+            // Load Mida script dynamically and wait for it to load
+            const script = document.createElement('script');
+            script.src = 'https://cdn.mida.so/js/optimize.js?key=E3jxwZ6ldLqbzYg90mMX8O';
+            script.onload = function() {
+              // Mida script has loaded, remove the opacity
+              document.body.style.opacity = '';
+            };
+            script.onerror = function() {
+              // Fallback: remove opacity after 3 seconds if script fails to load
+              setTimeout(() => {
+                document.body.style.opacity = '';
+              }, 3000);
+            };
+            document.head.appendChild(script);
           `
         }}
-      />
-      <Script 
-        src="https://cdn.mida.so/js/optimize.js?key=E3jxwZ6ldLqbzYg90mMX8O" 
-        strategy="beforeInteractive"
       />
       <Script 
         id="preconnect-mida"
@@ -41,7 +48,7 @@ export default function RootLayout({
   
     </head>
  
-      <body style={{ display: 'none' }}>
+      <body style={{ opacity: 0 }}>
         {children}
       </body>
     </html>
