@@ -17,13 +17,21 @@ export default function RootLayout({
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-            // Expose rmfk function for Optimize.js to call
-            window.rmfk = function() {
-              document.body.style.display = '';
-            };
-            
-            // Fallback timeout in case Optimize.js doesn't call rmfk
-            setTimeout(window.rmfk, 3000);
+            (function() {
+              var timeout = 3000;
+              var timeoutId;
+              
+              // Function to remove the flicker
+              window.rmfk = function() {
+                if (timeoutId) {
+                  clearTimeout(timeoutId);
+                }
+                document.body.style.display = '';
+              };
+              
+              // Set the fallback timeout
+              timeoutId = setTimeout(window.rmfk, timeout);
+            })();
           `
         }}
       />
