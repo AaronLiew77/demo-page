@@ -17,10 +17,14 @@ export default function RootLayout({
         dangerouslySetInnerHTML={{
           __html: `
             var timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
-            window.rmfk = function() {
-              document.body.style.opacity = '1';
-            };
-            setTimeout(window.rmfk, timeout);
+            !function(h,i,d){
+              i.rmfk = function() {
+                if (h.body) {
+                  h.body.removeAttribute('style');
+                }
+              };
+              setTimeout(i.rmfk, d);
+            }(document, window, timeout);
           `
         }}
       />
