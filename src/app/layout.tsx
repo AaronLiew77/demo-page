@@ -12,38 +12,19 @@ export default function RootLayout({
     <html lang="en">
     <head>
       <Script
-        id="flicker-prevention"
+        id="anti-flicker"
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-            // Create anti-flicker style element
-            var style = document.createElement("style");
-            style.id = "abhide";
-            style.innerHTML = "body{opacity:0}";
-            document.head.appendChild(style);
-
-            // Load Mida script and wait for it to load
-            var script = document.createElement('script');
-            script.src = 'https://cdn.mida.so/js/optimize.js?key=E3jxwZ6ldLqbzYg90mMX8O';
-            script.onload = function() {
-              // Mida script has loaded, remove the anti-flicker style
-              var styleElement = document.getElementById("abhide");
-              if (styleElement) {
-                styleElement.parentNode.removeChild(styleElement);
-              }
-            };
-            script.onerror = function() {
-              // Fallback: remove style after 3 seconds if script fails to load
-              setTimeout(function() {
-                var styleElement = document.getElementById("abhide");
-                if (styleElement) {
-                  styleElement.parentNode.removeChild(styleElement);
-                }
-              }, 3000);
-            };
-            document.head.appendChild(script);
+            setTimeout(() => {
+              document.body.style.opacity = '1';
+            }, 3000);
           `
         }}
+      />
+      <Script 
+        src="https://cdn.mida.so/js/optimize.js?key=E3jxwZ6ldLqbzYg90mMX8O" 
+        strategy="beforeInteractive"
       />
       <Script 
         id="preconnect-mida"
@@ -60,7 +41,7 @@ export default function RootLayout({
   
     </head>
  
-      <body>
+      <body style={{ opacity: 0 }}>
         {children}
       </body>
     </html>
