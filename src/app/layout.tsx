@@ -12,21 +12,33 @@ export default function RootLayout({
     <html lang="en">
     <head>
       <Script
-        id="anti-flicker"
+        id="flicker-prevention"
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-            // Load Mida script dynamically and wait for it to load
-            const script = document.createElement('script');
+            // Create anti-flicker style element
+            var style = document.createElement("style");
+            style.id = "abhide";
+            style.innerHTML = "body{opacity:0}";
+            document.head.appendChild(style);
+
+            // Load Mida script and wait for it to load
+            var script = document.createElement('script');
             script.src = 'https://cdn.mida.so/js/optimize.js?key=E3jxwZ6ldLqbzYg90mMX8O';
             script.onload = function() {
-              // Mida script has loaded, remove the opacity
-              document.body.style.opacity = '';
+              // Mida script has loaded, remove the anti-flicker style
+              var styleElement = document.getElementById("abhide");
+              if (styleElement) {
+                styleElement.parentNode.removeChild(styleElement);
+              }
             };
             script.onerror = function() {
-              // Fallback: remove opacity after 3 seconds if script fails to load
-              setTimeout(() => {
-                document.body.style.opacity = '';
+              // Fallback: remove style after 3 seconds if script fails to load
+              setTimeout(function() {
+                var styleElement = document.getElementById("abhide");
+                if (styleElement) {
+                  styleElement.parentNode.removeChild(styleElement);
+                }
               }, 3000);
             };
             document.head.appendChild(script);
@@ -48,7 +60,7 @@ export default function RootLayout({
   
     </head>
  
-      <body style={{ opacity: 0 }}>
+      <body>
         {children}
       </body>
     </html>
