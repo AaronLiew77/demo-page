@@ -1,6 +1,5 @@
 import "./globals.css";
 import Script from "next/script";
-import { MidaScript } from "mida-nextjs";
 
 
 export default function RootLayout({
@@ -24,11 +23,9 @@ export default function RootLayout({
               h.head.appendChild(n);
               t=d;
               i.rmfk=function(){
+                console.log('rmfk called');
                 var t=h.getElementById(e);
-                t && t.parentNode.removeChild(t);
-                if (h.body) {
-                  h.body.removeAttribute('style');
-                }
+                t && t.parentNode.removeChild(t)
               };
               setTimeout(i.rmfk,t)
             }(document,window,timeout,"abhide");
@@ -54,7 +51,7 @@ export default function RootLayout({
   
     </head>
  
-      <body style={{ opacity: 0 }}>
+      <body>
         {children}
       </body>
     </html>
