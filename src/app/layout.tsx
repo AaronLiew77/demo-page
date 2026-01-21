@@ -59,11 +59,6 @@ export default function RootLayout({
       <Script 
         src="https://cdn.mida.so/js/optimize.js?key=E3jxwZ6ldLqbzYg90mMX8O" 
         strategy="beforeInteractive"
-        onLoad={() => {
-          if (typeof window !== 'undefined') {
-            window.dispatchEvent(new Event('midaReady'));
-          }
-        }}
       />
       
       <Script 
