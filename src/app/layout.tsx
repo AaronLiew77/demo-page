@@ -17,14 +17,21 @@ export default function RootLayout({
         dangerouslySetInnerHTML={{
           __html: `
             var timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
-            !function(h,i,d){
-              i.rmfk = function() {
+            !function(h,i,d,e){
+              var t,n=h.createElement("style");
+              n.id=e;
+              n.innerHTML="body{opacity:0}";
+              h.head.appendChild(n);
+              t=d;
+              i.rmfk=function(){
+                var t=h.getElementById(e);
+                t && t.parentNode.removeChild(t);
                 if (h.body) {
                   h.body.removeAttribute('style');
                 }
               };
-              setTimeout(i.rmfk, d);
-            }(document, window, timeout);
+              setTimeout(i.rmfk,t)
+            }(document,window,timeout,"abhide");
           `
         }}
       />
