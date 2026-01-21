@@ -15,7 +15,7 @@ export default function RootLayout({
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-            var timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
+            var timeout = 10000; // Timeout value to remove the flicker (in milliseconds)
             !function(h,i,d,e){
               var t,n=h.createElement("style");
               n.id=e;
