@@ -29,83 +29,86 @@ export default function Home({ searchParams }: PageProps) {
 
   // Get Mida UUID on mount
   useEffect(() => {
-    const getMidaUuid = async () => {
-      if (window.mida?.uuid) {
-        try {
-          const uuid = await window.mida.uuid();
+    if (window.mida?.uuid) {
+      window.mida.uuid()
+        .then(uuid => {
+          console.log('✅ Mida UUID loaded:', uuid);
           setMidaUuid(uuid);
-        } catch (error) {
+        })
+        .catch(error => {
           console.error('Error getting Mida UUID:', error);
-        }
-      }
-    };
-    
-    // Wait a bit for Mida to initialize
-    setTimeout(getMidaUuid, 500);
+        });
+    }
   }, []);
 
   // Track page view on mount (with Mida UUID if available)
   useEffect(() => {
-    const trackPageview = async () => {
-      const properties: Record<string, any> = {
-        page_version: isV3 ? 'v3' : 'v1',
-        page_name: 'home',
-        tracking_source: 'client-side'
-      };
+    captureWithUuid('$pageview', {
+      page_version: isV3 ? 'v3' : 'v1',
+      page_name: 'home',
+      tracking_source: 'client-side'
+    });
+  }, [isV3]); // Only trigger on page version change, not UUID change
 
-      // Add Mida UUID if available
-      if (midaUuid) {
-        properties.mida_uuid = midaUuid;
-      }
-
-      posthog.capture('$pageview', properties);
-    };
-
-    trackPageview();
-  }, [isV3, midaUuid]);
-
-  // Helper function to add Mida UUID to event properties
-  const getEventProperties = (properties: Record<string, any>) => {
+  // Helper function to get event properties with Mida UUID
+  const captureWithUuid = (eventName: string, properties: Record<string, any>) => {
+    // If UUID is already loaded, use it immediately
     if (midaUuid) {
-      return { ...properties, mida_uuid: midaUuid };
+      posthog.capture(eventName, { ...properties, mida_uuid: midaUuid });
+      return;
     }
-    return properties;
+    
+    // Otherwise, fetch UUID and then capture
+    if (window.mida?.uuid) {
+      window.mida.uuid()
+        .then(uuid => {
+          setMidaUuid(uuid); // Cache for next time
+          posthog.capture(eventName, { ...properties, mida_uuid: uuid });
+        })
+        .catch(() => {
+          // If UUID fails, capture without it
+          posthog.capture(eventName, properties);
+        });
+    } else {
+      // Mida not available, capture without UUID
+      posthog.capture(eventName, properties);
+    }
   };
 
   // Event handlers
   const handleStartFreeTrial = () => {
-    posthog.capture('button_clicked', getEventProperties({
+    captureWithUuid('button_clicked', {
       button_name: 'Start Free Trial',
       page_version: isV3 ? 'v3' : 'v1',
       location: 'hero_section',
       tracking_source: 'client-side'
-    }));
+    });
   };
 
   const handleWatchDemo = () => {
-    posthog.capture('button_clicked', getEventProperties({
+    captureWithUuid('button_clicked', {
       button_name: 'Watch Demo',
       page_version: isV3 ? 'v3' : 'v1',
       location: 'hero_section',
       tracking_source: 'client-side'
-    }));
+    });
   };
 
   const handleContactSales = () => {
-    posthog.capture('button_clicked', getEventProperties({
+    captureWithUuid('button_clicked', {
       button_name: 'Contact Sales',
       page_version: isV3 ? 'v3' : 'v1',
       location: 'pricing_section',
       tracking_source: 'client-side'
-    }));
+    });
   };
 
   const handleNavLinkClick = (linkName: string) => {
-    posthog.capture('nav_link_clicked', getEventProperties({
+    captureWithUuid('nav_link_clicked', {
       link_name: linkName,
       page_version: isV3 ? 'v3' : 'v1',
       tracking_source: 'client-side'
-    }));
+    });
   };
 
   // V3 Layout - Dark theme with different structure
