@@ -1,9 +1,13 @@
+'use client'
+
 import Link from "next/link";
 import Image from "next/image";
 import ImageGallery from "./components/ImageGallery";
 import GetStartedButton from "./components/GetStartedButton";
 import ConfirmationPopup from "./components/ConfirmationPopup";
 import MixpanelInitializer from "./components/MixpanelInitializer";
+import posthog from 'posthog-js';
+import { useEffect } from 'react';
 
 interface PageProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -11,6 +15,46 @@ interface PageProps {
 
 export default function Home({ searchParams }: PageProps) {
   const isV3 = searchParams?.page === 'v3';
+
+  // Track page view on mount
+  useEffect(() => {
+    posthog.capture('$pageview', {
+      page_version: isV3 ? 'v3' : 'v1',
+      page_name: 'home'
+    });
+  }, [isV3]);
+
+  // Event handlers
+  const handleStartFreeTrial = () => {
+    posthog.capture('button_clicked', {
+      button_name: 'Start Free Trial',
+      page_version: isV3 ? 'v3' : 'v1',
+      location: 'hero_section'
+    });
+  };
+
+  const handleWatchDemo = () => {
+    posthog.capture('button_clicked', {
+      button_name: 'Watch Demo',
+      page_version: isV3 ? 'v3' : 'v1',
+      location: 'hero_section'
+    });
+  };
+
+  const handleContactSales = () => {
+    posthog.capture('button_clicked', {
+      button_name: 'Contact Sales',
+      page_version: isV3 ? 'v3' : 'v1',
+      location: 'pricing_section'
+    });
+  };
+
+  const handleNavLinkClick = (linkName: string) => {
+    posthog.capture('nav_link_clicked', {
+      link_name: linkName,
+      page_version: isV3 ? 'v3' : 'v1'
+    });
+  };
 
   // V3 Layout - Dark theme with different structure
   if (isV3) {
@@ -25,9 +69,9 @@ export default function Home({ searchParams }: PageProps) {
               SaaSify V3
             </div>
             <div className="hidden md:flex space-x-8">
-              <a href="https://aaronliew.vercel.app/" className="text-gray-300 hover:text-purple-400 transition-colors">Check this out</a>
-              <a href="#pricing" className="text-gray-300 hover:text-purple-400 transition-colors">Pricing</a>
-              <a href="#about" className="text-gray-300 hover:text-purple-400 transition-colors">About</a>
+              <a href="https://aaronliew.vercel.app/" className="text-gray-300 hover:text-purple-400 transition-colors" onClick={() => handleNavLinkClick('Check this out')}>Check this out</a>
+              <a href="#pricing" className="text-gray-300 hover:text-purple-400 transition-colors" onClick={() => handleNavLinkClick('Pricing')}>Pricing</a>
+              <a href="#about" className="text-gray-300 hover:text-purple-400 transition-colors" onClick={() => handleNavLinkClick('About')}>About</a>
             </div>
             <div className="flex space-x-4">
               <Link href="/v2" className="text-gray-300 hover:text-purple-400 transition-colors">
@@ -53,10 +97,10 @@ export default function Home({ searchParams }: PageProps) {
               The all-in-one platform that helps you launch, scale, and grow your SaaS business with powerful tools and analytics.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-5 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all shadow-2xl transform hover:scale-105">
+              <button onClick={handleStartFreeTrial} className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-5 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all shadow-2xl transform hover:scale-105">
                 Start Free Trial
               </button>
-              <button className="border-2 border-purple-500 text-purple-400 px-10 py-5 rounded-xl text-lg font-semibold hover:bg-purple-500 hover:text-white transition-all transform hover:scale-105">
+              <button onClick={handleWatchDemo} className="border-2 border-purple-500 text-purple-400 px-10 py-5 rounded-xl text-lg font-semibold hover:bg-purple-500 hover:text-white transition-all transform hover:scale-105">
                 Watch Demo
               </button>
             </div>
@@ -185,7 +229,7 @@ export default function Home({ searchParams }: PageProps) {
                     24/7 phone support
                   </li>
                 </ul>
-                <button className="w-full bg-gray-700 text-white py-4 rounded-xl font-semibold hover:bg-gray-600 transition-all">
+                <button onClick={handleContactSales} className="w-full bg-gray-700 text-white py-4 rounded-xl font-semibold hover:bg-gray-600 transition-all">
                   Contact Sales
                 </button>
               </div>
@@ -222,9 +266,9 @@ export default function Home({ searchParams }: PageProps) {
             SaaSify
           </div>
           <div className="hidden md:flex space-x-8">
-            <a href="https://aaronliew.vercel.app/" className="text-gray-600 hover:text-indigo-600 transition-colors">Check this out</a>
-            <a href="#pricing" className="text-gray-600 hover:text-indigo-600 transition-colors">Pricing</a>
-            <a href="#about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</a>
+            <a href="https://aaronliew.vercel.app/" className="text-gray-600 hover:text-indigo-600 transition-colors" onClick={() => handleNavLinkClick('Check this out')}>Check this out</a>
+            <a href="#pricing" className="text-gray-600 hover:text-indigo-600 transition-colors" onClick={() => handleNavLinkClick('Pricing')}>Pricing</a>
+            <a href="#about" className="text-gray-600 hover:text-indigo-600 transition-colors" onClick={() => handleNavLinkClick('About')}>About</a>
           </div>
           <div className="flex space-x-4">
             <Link href="/v2" className="text-gray-600 hover:text-indigo-600 transition-colors">
@@ -261,10 +305,10 @@ export default function Home({ searchParams }: PageProps) {
             The all-in-one platform that helps you launch, scale, and grow your SaaS business with powerful tools and analytics.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors">
+            <button onClick={handleStartFreeTrial} className="bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors">
               Start Free Trial
             </button>
-            <button className="border border-gray-300 text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors">
+            <button onClick={handleWatchDemo} className="border border-gray-300 text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors">
               Watch Demo
             </button>
           </div>
@@ -393,7 +437,7 @@ export default function Home({ searchParams }: PageProps) {
                   24/7 phone support
                 </li>
               </ul>
-              <button className="w-full bg-gray-200 text-gray-800 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+              <button onClick={handleContactSales} className="w-full bg-gray-200 text-gray-800 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
                 Contact Sales
               </button>
             </div>
