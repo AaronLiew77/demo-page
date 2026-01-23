@@ -8,7 +8,16 @@ import GetStartedButton from "./components/GetStartedButton";
 import ConfirmationPopup from "./components/ConfirmationPopup";
 import MixpanelInitializer from "./components/MixpanelInitializer";
 import posthog from 'posthog-js';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+// Extend window type for Mida
+declare global {
+  interface Window {
+    mida?: {
+      uuid: () => Promise<string>;
+    };
+  }
+}
 
 interface PageProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -16,50 +25,87 @@ interface PageProps {
 
 export default function Home({ searchParams }: PageProps) {
   const isV3 = searchParams?.page === 'v3';
+  const [midaUuid, setMidaUuid] = useState<string | null>(null);
 
-  // Track page view on mount
+  // Get Mida UUID on mount
   useEffect(() => {
-    posthog.capture('$pageview', {
-      page_version: isV3 ? 'v3' : 'v1',
-      page_name: 'home',
-      tracking_source: 'client-side'
-    });
-  }, [isV3]);
+    const getMidaUuid = async () => {
+      if (window.mida?.uuid) {
+        try {
+          const uuid = await window.mida.uuid();
+          setMidaUuid(uuid);
+        } catch (error) {
+          console.error('Error getting Mida UUID:', error);
+        }
+      }
+    };
+    
+    // Wait a bit for Mida to initialize
+    setTimeout(getMidaUuid, 500);
+  }, []);
+
+  // Track page view on mount (with Mida UUID if available)
+  useEffect(() => {
+    const trackPageview = async () => {
+      const properties: Record<string, any> = {
+        page_version: isV3 ? 'v3' : 'v1',
+        page_name: 'home',
+        tracking_source: 'client-side'
+      };
+
+      // Add Mida UUID if available
+      if (midaUuid) {
+        properties.mida_uuid = midaUuid;
+      }
+
+      posthog.capture('$pageview', properties);
+    };
+
+    trackPageview();
+  }, [isV3, midaUuid]);
+
+  // Helper function to add Mida UUID to event properties
+  const getEventProperties = (properties: Record<string, any>) => {
+    if (midaUuid) {
+      return { ...properties, mida_uuid: midaUuid };
+    }
+    return properties;
+  };
 
   // Event handlers
   const handleStartFreeTrial = () => {
-    posthog.capture('button_clicked', {
+    posthog.capture('button_clicked', getEventProperties({
       button_name: 'Start Free Trial',
       page_version: isV3 ? 'v3' : 'v1',
       location: 'hero_section',
       tracking_source: 'client-side'
-    });
+    }));
   };
 
   const handleWatchDemo = () => {
-    posthog.capture('button_clicked', {
+    posthog.capture('button_clicked', getEventProperties({
       button_name: 'Watch Demo',
       page_version: isV3 ? 'v3' : 'v1',
       location: 'hero_section',
       tracking_source: 'client-side'
-    });
+    }));
   };
 
   const handleContactSales = () => {
-    posthog.capture('button_clicked', {
+    posthog.capture('button_clicked', getEventProperties({
       button_name: 'Contact Sales',
       page_version: isV3 ? 'v3' : 'v1',
       location: 'pricing_section',
       tracking_source: 'client-side'
-    });
+    }));
   };
 
   const handleNavLinkClick = (linkName: string) => {
-    posthog.capture('nav_link_clicked', {
+    posthog.capture('nav_link_clicked', getEventProperties({
       link_name: linkName,
       page_version: isV3 ? 'v3' : 'v1',
       tracking_source: 'client-side'
-    });
+    }));
   };
 
   // V3 Layout - Dark theme with different structure
