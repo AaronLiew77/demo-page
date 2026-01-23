@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ServerTrackingExample from "../components/ServerTrackingExample";
 
 export default function V2Page() {
   return (
@@ -90,6 +91,19 @@ export default function V2Page() {
           </div>
         </div>
       </main>
+
+      {/* Server Tracking Demo */}
+      <section className="px-6 py-20 bg-white/5">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-5xl font-bold text-center text-white mb-8">
+            Test Server-Side Tracking
+          </h2>
+          <p className="text-center text-purple-200 mb-12 max-w-2xl mx-auto">
+            Try out the server-side event tracking below. Events will be sent to PostHog with <code className="bg-white/10 px-2 py-1 rounded">tracking_source: "server-side"</code>
+          </p>
+          <ServerTrackingExample />
+        </div>
+      </section>
 
       {/* Features Grid */}
       <section id="dashboard" className="px-6 py-20">
