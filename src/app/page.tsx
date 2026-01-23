@@ -4,6 +4,7 @@ import ImageGallery from "./components/ImageGallery";
 import GetStartedButton from "./components/GetStartedButton";
 import ConfirmationPopup from "./components/ConfirmationPopup";
 import MixpanelInitializer from "./components/MixpanelInitializer";
+import { StartFreeTrialButton, WatchDemoButton, ContactSalesButton } from "./components/HeroButtons";
 
 interface PageProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -53,12 +54,8 @@ export default function Home({ searchParams }: PageProps) {
               The all-in-one platform that helps you launch, scale, and grow your SaaS business with powerful tools and analytics.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-5 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all shadow-2xl transform hover:scale-105">
-                Start Free Trial
-              </button>
-              <button className="border-2 border-purple-500 text-purple-400 px-10 py-5 rounded-xl text-lg font-semibold hover:bg-purple-500 hover:text-white transition-all transform hover:scale-105">
-                Watch Demo
-              </button>
+              <StartFreeTrialButton className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-5 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all shadow-2xl transform hover:scale-105" />
+              <WatchDemoButton className="border-2 border-purple-500 text-purple-400 px-10 py-5 rounded-xl text-lg font-semibold hover:bg-purple-500 hover:text-white transition-all transform hover:scale-105" />
             </div>
           </div>
         </main>
@@ -185,9 +182,7 @@ export default function Home({ searchParams }: PageProps) {
                     24/7 phone support
                   </li>
                 </ul>
-                <button className="w-full bg-gray-700 text-white py-4 rounded-xl font-semibold hover:bg-gray-600 transition-all">
-                  Contact Sales
-                </button>
+                <ContactSalesButton className="w-full bg-gray-700 text-white py-4 rounded-xl font-semibold hover:bg-gray-600 transition-all" />
               </div>
             </div>
           </div>
@@ -261,12 +256,8 @@ export default function Home({ searchParams }: PageProps) {
             The all-in-one platform that helps you launch, scale, and grow your SaaS business with powerful tools and analytics.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors">
-              Start Free Trial
-            </button>
-            <button className="border border-gray-300 text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors">
-              Watch Demo
-            </button>
+            <StartFreeTrialButton className="bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors" />
+            <WatchDemoButton className="border border-gray-300 text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors" />
           </div>
         </div>
       </main>
@@ -393,9 +384,7 @@ export default function Home({ searchParams }: PageProps) {
                   24/7 phone support
                 </li>
               </ul>
-              <button className="w-full bg-gray-200 text-gray-800 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
-                Contact Sales
-              </button>
+              <ContactSalesButton className="w-full bg-gray-200 text-gray-800 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors" />
             </div>
           </div>
         </div>
