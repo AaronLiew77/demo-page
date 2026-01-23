@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import posthog from 'posthog-js';
 
 export default function ConfirmationPopup() {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,25 +14,11 @@ export default function ConfirmationPopup() {
   }, []);
 
   const handleClose = () => {
-    // PostHog event tracking
-    posthog.capture('identity_cancelled', {
-      action: 'close_button',
-    });
     setIsVisible(false);
   };
 
   const handleConfirm = () => {
-    // PostHog event tracking
-    posthog.capture('identity_confirmed');
     // Handle confirmation logic here
-    setIsVisible(false);
-  };
-
-  const handleCancel = () => {
-    // PostHog event tracking
-    posthog.capture('identity_cancelled', {
-      action: 'cancel_button',
-    });
     setIsVisible(false);
   };
 
@@ -66,7 +51,7 @@ export default function ConfirmationPopup() {
               Confirm
             </button>
             <button
-              onClick={handleCancel}
+              onClick={handleClose}
               className="flex-1 bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
             >
               Cancel

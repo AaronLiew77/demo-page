@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { UpgradeButton, LaunchV2BetaButton, ViewFeaturesButton, StartV2BetaTrialButton, ScheduleDemoButton } from "../components/V2Buttons";
 
 export default function V2Page() {
   return (
@@ -19,7 +18,9 @@ export default function V2Page() {
             <Link href="/" className="text-purple-200 hover:text-white transition-colors">
               ← Back to V1
             </Link>
-            <UpgradeButton className="bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-colors" />
+            <button className="bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-colors">
+              Upgrade
+            </button>
           </div>
         </div>
       </nav>
@@ -39,8 +40,12 @@ export default function V2Page() {
                 Experience the future of SaaS with our revolutionary V2 platform. Built with cutting-edge technology and designed for scale.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <LaunchV2BetaButton className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105" />
-                <ViewFeaturesButton className="border-2 border-purple-300 text-purple-200 px-8 py-4 rounded-full text-lg font-semibold hover:bg-purple-300 hover:text-purple-900 transition-all" />
+                <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105">
+                  Launch V2 Beta
+                </button>
+                <button className="border-2 border-purple-300 text-purple-200 px-8 py-4 rounded-full text-lg font-semibold hover:bg-purple-300 hover:text-purple-900 transition-all">
+                  View Features
+                </button>
               </div>
             </div>
             <div className="relative">
@@ -163,8 +168,12 @@ export default function V2Page() {
               Join thousands of forward-thinking companies already using SaaSify V2.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <StartV2BetaTrialButton className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-10 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105" />
-              <ScheduleDemoButton className="border-2 border-white/30 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all" />
+              <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-10 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105">
+                Start V2 Beta Trial
+              </button>
+              <button className="border-2 border-white/30 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all">
+                Schedule Demo
+              </button>
             </div>
           </div>
         </div>
