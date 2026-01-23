@@ -292,7 +292,7 @@ export default function Home({ searchParams }: PageProps) {
             SaaSify
           </div>
           <div className="hidden md:flex space-x-8">
-            <a href="https://aaronliew.vercel.app/" className="text-gray-600 hover:text-indigo-600 transition-colors" onClick={() => handleNavLinkClick('Check this out')}>Check this out</a>
+            <a href="" className="text-gray-600 hover:text-indigo-600 transition-colors" onClick={() => handleNavLinkClick('Check this out')}>Check this out</a>
             <a href="#pricing" className="text-gray-600 hover:text-indigo-600 transition-colors" onClick={() => handleNavLinkClick('Pricing')}>Pricing</a>
             <a href="#about" className="text-gray-600 hover:text-indigo-600 transition-colors" onClick={() => handleNavLinkClick('About')}>About</a>
           </div>
