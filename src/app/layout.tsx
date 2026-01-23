@@ -1,9 +1,7 @@
 import "./globals.css";
 import Script from "next/script";
 import { MidaScript } from "mida-nextjs";
-import { PostHogProvider } from "./providers/PostHogProvider";
-import { PostHogPageView } from "./components/PostHogPageView";
-import { Suspense } from "react";
+
 
 export default function RootLayout({
   children,
@@ -57,12 +55,7 @@ export default function RootLayout({
     </head>
  
       <body style={{ opacity: 0 }}>
-        <PostHogProvider>
-          <Suspense fallback={null}>
-            <PostHogPageView />
-          </Suspense>
-          {children}
-        </PostHogProvider>
+        {children}
       </body>
     </html>
   )
