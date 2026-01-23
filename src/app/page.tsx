@@ -21,7 +21,8 @@ export default function Home({ searchParams }: PageProps) {
   useEffect(() => {
     posthog.capture('$pageview', {
       page_version: isV3 ? 'v3' : 'v1',
-      page_name: 'home'
+      page_name: 'home',
+      tracking_source: 'client-side'
     });
   }, [isV3]);
 
@@ -30,7 +31,8 @@ export default function Home({ searchParams }: PageProps) {
     posthog.capture('button_clicked', {
       button_name: 'Start Free Trial',
       page_version: isV3 ? 'v3' : 'v1',
-      location: 'hero_section'
+      location: 'hero_section',
+      tracking_source: 'client-side'
     });
   };
 
@@ -38,7 +40,8 @@ export default function Home({ searchParams }: PageProps) {
     posthog.capture('button_clicked', {
       button_name: 'Watch Demo',
       page_version: isV3 ? 'v3' : 'v1',
-      location: 'hero_section'
+      location: 'hero_section',
+      tracking_source: 'client-side'
     });
   };
 
@@ -46,14 +49,16 @@ export default function Home({ searchParams }: PageProps) {
     posthog.capture('button_clicked', {
       button_name: 'Contact Sales',
       page_version: isV3 ? 'v3' : 'v1',
-      location: 'pricing_section'
+      location: 'pricing_section',
+      tracking_source: 'client-side'
     });
   };
 
   const handleNavLinkClick = (linkName: string) => {
     posthog.capture('nav_link_clicked', {
       link_name: linkName,
-      page_version: isV3 ? 'v3' : 'v1'
+      page_version: isV3 ? 'v3' : 'v1',
+      tracking_source: 'client-side'
     });
   };
 
