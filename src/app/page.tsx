@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import Script from "next/script";
 import ImageGallery from "./components/ImageGallery";
 import GetStartedButton from "./components/GetStartedButton";
 import ConfirmationPopup from "./components/ConfirmationPopup";
@@ -60,6 +61,16 @@ export default function Home({ searchParams }: PageProps) {
   if (isV3) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+        <Script
+          id="mida-track"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.mdq = window.mdq || [];
+              window.mdq.push(["track", "*"]);
+            `
+          }}
+        />
         <MixpanelInitializer />
         <ConfirmationPopup />
         {/* Navigation */}
@@ -256,6 +267,16 @@ export default function Home({ searchParams }: PageProps) {
   // Original Layout
   return (
     <div className="min-h-screen bg-white">
+      <Script
+        id="mida-track"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.mdq = window.mdq || [];
+            window.mdq.push(["track", "*"]);
+          `
+        }}
+      />
       {/* <MixpanelInitializer /> */}
       <ConfirmationPopup />
       {/* Navigation */}
