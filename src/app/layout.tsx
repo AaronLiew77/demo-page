@@ -1,6 +1,8 @@
 import "./globals.css";
 import Script from "next/script";
 import { MidaScript } from "mida-nextjs";
+import { PostHogProvider } from './providers'
+
 
 
 export default function RootLayout({
@@ -53,10 +55,11 @@ export default function RootLayout({
       />
   
     </head>
- 
+    <PostHogProvider>
       <body style={{ opacity: 0 }}>
-        {children}
-      </body>
+          {children}
+        </body>
+      </PostHogProvider>
     </html>
   )
 }
